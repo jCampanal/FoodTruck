@@ -17,7 +17,7 @@ const LogoBar =()=>{
                 <Name>Estilos</Name>
             </DivContentLogo>
             <DivContentNav>
-                <NavIcon Color={'black'}/>
+                <NavIcon Color={'#1976d2'}/>
             </DivContentNav>
         </ConteinedLogo>
     )

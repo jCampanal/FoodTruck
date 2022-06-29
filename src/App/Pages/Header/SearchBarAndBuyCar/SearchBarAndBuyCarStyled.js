@@ -21,9 +21,9 @@ display: flex;
 }
 `;
 export const ResponsiveIconsContained=styled.div`
-display:inline-flex;
+display:none;
 @media screen and (min-width:600px){
-    display:none;
+    display:inline-flex;
 }`;
 
 export const IconsSx={color:'white'}

@@ -14,8 +14,9 @@ import {
     NavDivs,
     Backdrop,
     RegisterDivs,
-    LinkS,
+    H4S,
     Name,
+    ConteindIcon,
     RegisterBottom} from './SideMenuStyled'
 import {NavListData} from '../../Routes/NavListData';
 import IconButton from '@mui/material/IconButton';
@@ -23,6 +24,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import MuiLoginButton from '../MuiLoginButton/MuiLoguinButton';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
+import { setNavOpacity } from '../../Store/NavEffect/NavEffect';
 import MuiHistorialButton from '../MuiHistorialButton/MuiHistorialButton';
 import { useDispatch,useSelector } from "react-redux";
 import { setOpenDesktop} from "../../Store/SideMenu/SideMenu";
@@ -38,6 +40,14 @@ const SideMenu=(props)=>{
         dispatch(setOpenDesktop(false))
     }
 
+    const HandlerNavList=(path)=>{
+        dispatch(setOpenDesktop(false))
+        dispatch(setNavOpacity(false))
+        setTimeout(()=>{
+            navegate(path)
+        },600)
+    }
+
     return(
         <>
         <Backdrop Show={open} onClick={HandleCloseButtonClick}/>
@@ -51,7 +61,7 @@ const SideMenu=(props)=>{
 
             <RegisterDivs>
                 <RegisterBottom>
-                <MuiLoginButton/>
+                <MuiLoginButton Close={HandleCloseButtonClick}/>
                 </RegisterBottom>
                 <RegisterBottom>
                 <MuiHistorialButton/>
@@ -68,16 +78,15 @@ const SideMenu=(props)=>{
                     return(
                             
                             <ListItem button
-                                    sx={{justifyContent: "center",
+                                    sx={{justifyContent: "left",
                                         alignItems:'center',
-                                        marginBottom:'10px',
-                                        height:'20px'}}
+                                        }}
                                     key={element.Title}
                                     selected={element.HREF === location.pathname}
-                                    onClick ={()=>{navegate(element.HREF)}}
+                                    onClick ={()=>{HandlerNavList(element.HREF)}}
                                     >                                       
-        
-                                                {element.Title}                                            
+                                                <ConteindIcon>{element.Icon}</ConteindIcon>
+                                                <H4S>{element.Title}</H4S>                                            
                                         
                             </ListItem>
                            

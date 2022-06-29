@@ -6,7 +6,7 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 height:70px;
-@media screen and (min-width:400px){
+@media screen and (min-width:600px){
     justify-content:left;
 }`; 
 
@@ -17,7 +17,7 @@ display:flex;
 export const DivContentNav = styled.div`
 display:flex;
 margin-right:5px;
-@media screen and (min-width:400px){
+@media screen and (min-width:600px){
     display:none;
 }`; 
 

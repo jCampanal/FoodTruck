@@ -70,3 +70,10 @@ export const Name = styled.h3`
 margin-left:18px;
 color: #1976d2;
 font-family:Decorative;`; 
+
+export const H4S=styled.h4`
+text-align:center;
+margin: 5px 30px;`;
+
+export const ConteindIcon=styled.div`
+margin-left: 20px;`;

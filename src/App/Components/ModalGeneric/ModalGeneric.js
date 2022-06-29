@@ -15,8 +15,7 @@ import LogMenu from '../LogMenu/LogMenu';
 const ModalGeneric=()=>{
     const open=useSelector(selectOpen)
     const content=useSelector(selectContent)
-    const Title=useSelector(selectTitle)
-    console.log(Title)   
+    const Title=useSelector(selectTitle)   
     const dispatch=useDispatch()
 
     const HandleCloseButtonClick=()=>{

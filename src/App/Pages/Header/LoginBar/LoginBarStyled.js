@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const FirstDivLoguin=styled.div`
 width:100%;
-position:sticky;
+position:relative;
 top:0;
 zIndex:30;
 display: flex;
@@ -16,6 +16,7 @@ display: flex;
 height:30px;
 width:100%;
 transition: all 300ms;
+
 @media screen and (min-width:400px){
     justify-content:space-between;
 }`;

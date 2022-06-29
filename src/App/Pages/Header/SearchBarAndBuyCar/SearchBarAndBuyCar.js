@@ -9,23 +9,54 @@ import SearchBar from './SearchBar/SearchBar'
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-const SearchBarAndBuyCar=()=>{
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { setOpenModal, setContentModal,setTitleModal} from "../../../Store/MotionGenerix/ModalGeneric";
+import SearchMenu from '../../../Components/SearchMenu/SearchMenu';
+import { useDispatch,useSelector } from "react-redux";
+import ShopingList from '../../../Components/ShopingList/ShopingList';
+import { setNavOpacity } from '../../../Store/NavEffect/NavEffect';
+import { useNavigate } from 'react-router';
 
+const SearchBarAndBuyCar=()=>{
+    const dispatch=useDispatch()
+
+    const navigate=useNavigate()
+
+    const HandlerClickHome=()=>{
+        dispatch(setNavOpacity(false))
+        setTimeout(()=>{navigate('/')},700)
+    }
+
+
+    const HandlerSearch=()=>{
+        dispatch(setTitleModal('Buscar'))
+        dispatch(setContentModal(<SearchMenu></SearchMenu>))
+        setTimeout(()=>{dispatch(setOpenModal(true))},200)
+        
+    }
+
+
+    const HandlerClickCar=()=>{
+        dispatch(setTitleModal('Compra'))
+        dispatch(setContentModal(<ShopingList></ShopingList>))
+        setTimeout(()=>{dispatch(setOpenModal(true))},200)
+    }
     return(
+        
         <FirstDivSearch>
             <IconsContained>
-                <IconButton>
+            <ResponsiveIconsContained>
+                <IconButton onClick={()=>{HandlerClickHome()}}>
                     <AccountBalanceIcon sx={IconsSx}/>                    
                 </IconButton>
-                <IconButton>
-                    <AddShoppingCartIcon sx={IconsSx}/>                    
+                <IconButton onClick={()=>{HandlerClickCar()}}>
+                    <ShoppingCartIcon sx={IconsSx}/>                    
                 </IconButton>
-                <ResponsiveIconsContained>
-                    <IconButton>
-                        <SearchIcon sx={IconsSx}/>                    
-                    </IconButton>
-                </ResponsiveIconsContained>
+                
+                 {/*   <IconButton onClick={()=>{HandlerSearch()}}>
+                            <SearchIcon sx={IconsSx}/>                    
+                        </IconButton>*/}
+            </ResponsiveIconsContained>
             </IconsContained>
 
             <SearchBar/>

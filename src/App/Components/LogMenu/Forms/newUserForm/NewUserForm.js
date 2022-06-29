@@ -3,12 +3,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useFormContext } from "react-hook-form";
 import Field from '../../../Field/Field';
-import { ContrastRounded } from '@mui/icons-material';
 import {ContentForm, DivContent,AuthButtonSX,ChangeMenu} from './NewUserFormStyled'
-import { Button } from '@mui/material';
+import {setOpenNotification,setContentNotification,setStatusNotification} from '../../../../Store/NotificationDiv/NotificationDiv'
 import { useDispatch,useSelector } from "react-redux";
-import { login } from "../../../../Store/auth/authorizationSlice";
-import { setOpenModal} from "../../../../Store/MotionGenerix/ModalGeneric";
 import { motion } from 'framer-motion';
 
 const phoneRegex =
@@ -54,7 +51,7 @@ const UserForm =(props)=>{
         control,
         reset,
         getValues,
-        
+        handleSubmit,
         formState: {dirtyFields,isValid, errors },
     } = useForm({
         defaultValues: defaulFormValues,
@@ -67,29 +64,21 @@ const UserForm =(props)=>{
 
     const handleSubmitForm=()=>{      
         setTryCreateOrder(true)
-        console.log(isValid)
-        console.log(errors)
         if(isValid){
         //Aqui en teoria se envia la orden
-        console.log('Entro')
-        if(window.localStorage.getItem('usuario')===getValues("usuario")&&window.localStorage.getItem('codigo')===getValues("codigo")){
-          console.log('Entro')
-          dispatch(login({
-            token: 'Xmalertisopperewrsd',
-            refreshToken: 'kamomsaiomw0iemdksfkms iwe0je02kmksdfklsdf oawe0jw0',
-          }))
-          dispatch(setOpenModal(false))
-        }else{
-
-        }
-
+        props.ChangeMenu('Registro')
+        window.localStorage.setItem('usuario',getValues('usuario'))
+        window.localStorage.setItem('codigo',getValues('password'))
+        dispatch(setContentNotification('Código 31650'))
+        dispatch(setStatusNotification('X'))
+        dispatch(setOpenNotification(true))
       }
     }    
     
 
     return(
         
-      <form>
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
       <ContentForm as={motion.div} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
       <DivContent Width='100%' Center>
           <ChangeMenu onClick={()=>props.ChangeMenu('Reset')}>{'Reiniciar Cuenta'}</ChangeMenu>
@@ -132,7 +121,7 @@ const UserForm =(props)=>{
         size="small"
         variant="standard"
         control={control}
-        error={errors.correo||((!dirtyFields.correo&&TryCreateOrder)}
+        error={errors.correo||((!dirtyFields.correo&&TryCreateOrder))}
         helperText={errors?.correo?.message}
         label={'Correo'}
         type='text'
@@ -151,7 +140,7 @@ const UserForm =(props)=>{
         id="telefono"
       />
       <DivContent>
-          <AuthButtonSX onClick={handleSubmitForm}>Crear usuario</AuthButtonSX>
+          <AuthButtonSX type='submit'>Crear usuario</AuthButtonSX>
       </DivContent>  
       </ContentForm> 
       </form>

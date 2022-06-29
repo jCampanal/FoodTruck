@@ -3,13 +3,16 @@ import {ButtonS} from './LoguinButtonStyled'
 import { useDispatch,useSelector } from "react-redux";
 import { setOpenModal, setContentModal,setTitleModal} from "../../Store/MotionGenerix/ModalGeneric";
 import { selectOpen, selectContent} from "../../Store/MotionGenerix/ModalGeneric";
+import { logout } from "../../Store/auth/authorizationSlice";
+import { selectUserName, selectStatus} from "../../Store/auth/authorizationSlice"
 import LogMenu from '../LogMenu/LogMenu'
-const LoguinButton=(props)=>{
-    const [logueado, setLogueado]=useState(false)
-    const open=useSelector(selectOpen)
-    const content=useSelector(selectContent)    
-    const dispatch=useDispatch()
+import {setOpenNotification,setContentNotification,setStatusNotification} from '../../Store/NotificationDiv/NotificationDiv'
 
+const LoguinButton=(props)=>{
+    const [logueado, setLogueado]=useState(false)    
+     
+    const dispatch=useDispatch()
+    const Status= useSelector(selectStatus)
     const HandlerInitSesion=()=>{
         dispatch(setTitleModal('Inicio de Sesión'))
         dispatch(setContentModal(<LogMenu></LogMenu>))
@@ -17,19 +20,20 @@ const LoguinButton=(props)=>{
         
     }
 
-    useEffect(()=>{
-        if(window.localStorage.getItem("token")){
-            setLogueado(true)
-        }else{
-            setLogueado(false)
-        }
-    },[])
+
+    const HandlerLogout=()=>{
+        dispatch(logout())
+        dispatch(setContentNotification('Sección finalizada'))
+        dispatch(setStatusNotification('succ'))
+        dispatch(setOpenNotification(true))
+    }
+
     return(
         <>
-        {!logueado&&<ButtonS {...props} onClick={HandlerInitSesion}>
+        {!Status&&<ButtonS {...props} onClick={HandlerInitSesion}>
             {'Iniciar sesión'}
         </ButtonS>}
-        {logueado&&<ButtonS {...props}>
+        {Status&&<ButtonS {...props} onClick={HandlerLogout}>
             {'Cerrar sesión'}
         </ButtonS>}
         </>

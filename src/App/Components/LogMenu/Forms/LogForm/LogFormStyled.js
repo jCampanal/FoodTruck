@@ -3,9 +3,20 @@ import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
 
 export const ContentForm=Styled.div`
+display:${(props)=>(props.Display?props.Display:'flex')};
+align-items:${(props)=>(props.Item?props.Item:'center')};
+flex-direction:${(props)=>(props.Row?'row':'column')};
+width:${(props)=>(props.Width?props.Width:'100%')};
+justify-content:${(props)=>(props.Justify?props.Justify:'right')};
+margin:${(props)=>(props.Margin?props.Margin:'0')};`;
+
+export const ContentInput=Styled.div`
+width:48%;
 display:flex;
-align-items:center;
-flex-direction:column`;
+@media screen and (min-width:400px){
+  width:100%;
+}`;
+
 export const DivContent=Styled.div`
 display:flex;
 width:${(props)=>(props.Width?props.Width:'80%')};

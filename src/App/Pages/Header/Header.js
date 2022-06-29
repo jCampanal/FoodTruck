@@ -6,14 +6,14 @@ import LogoBar from './LogoBar/LogoBar'
 import LoginBar from './LoginBar/LoginBar'
 import SearchBarAndBuyCar from './SearchBarAndBuyCar/SearchBarAndBuyCar'
 
-const Header =()=>{
+const Header =(props)=>{
     return(
         <>
         <LogoBar/>
         <LoginBar/>
         <NavBar/>
         <PublicityContained/>
-        <SearchBarAndBuyCar/>
+        <SearchBarAndBuyCar/>        
         </>
     )
 }
