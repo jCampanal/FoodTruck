@@ -7,6 +7,7 @@ import authorization from './auth'
 import shopingList from './ShopingList'
 import notificationDiv from "./NotificationDiv";
 import navEffect from "./NavEffect";
+import historialData from "./HistorialData"
 
 const createReducer = (asyncReducers) => (state, action) => {
   const combinedReducer = combineReducers({
@@ -18,6 +19,7 @@ const createReducer = (asyncReducers) => (state, action) => {
     shopingList,
     notificationDiv,
     navEffect,
+    historialData,
     ...asyncReducers,
   });
 

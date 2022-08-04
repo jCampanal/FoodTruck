@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useFormContext } from "react-hook-form";
 import Field from '../../../Field/Field';
 import {ContentForm, DivContent,AuthButtonSX,ChangeMenu} from './LogFormStyled'
+import { useNavigate } from 'react-router';
 import { useDispatch,useSelector } from "react-redux";
 import { login } from "../../../../Store/auth/authorizationSlice";
 import { setOpenModal} from "../../../../Store/MotionGenerix/ModalGeneric";
@@ -18,9 +19,11 @@ const defaulFormValues = {
 const LogForm=(props)=>{
   const [TryCreateOrder,setTryCreateOrder]=useState(false)
   const dispatch=useDispatch()
+  const navigate=useNavigate()
+
     const validationRules = yup.object().shape({
-        usuario: yup.string().required("campo requerido"),
-        codigo: yup.string().required("campo requerido"),
+        usuario: yup.string().required("required"),
+        codigo: yup.string().required("required"),
       });
 
     const {
@@ -50,12 +53,13 @@ const LogForm=(props)=>{
             refreshToken: 'kamomsaiomw0iemdksfkms iwe0je02kmksdfklsdf oawe0jw0',
             name: getValues("usuario")
           }))
-          dispatch(setOpenModal(false))
-          dispatch(setContentNotification(`Sesión ${getValues("usuario")} inciada `))
+          
+          dispatch(setContentNotification(`${getValues("usuario")} session started `))
           dispatch(setStatusNotification('succ'))
           dispatch(setOpenNotification(true))
+          navigate('/')
         }else{
-          dispatch(setContentNotification('contraseña o usuario incorrectos'))
+          dispatch(setContentNotification('wrong username or password'))
           dispatch(setStatusNotification('fall'))
           dispatch(setOpenNotification(true))
         }
@@ -69,15 +73,15 @@ const LogForm=(props)=>{
       <ContentForm as={motion.div} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
        
             <DivContent Width='100%' Center>
-                <ChangeMenu onClick={()=>props.ChangeMenu('Nuevo')}>{'Nuevo usuario'}</ChangeMenu>
+                <ChangeMenu onClick={()=>props.ChangeMenu('Nuevo')}>{'sign in'}</ChangeMenu>
             </DivContent>
                   <Field
                     size="small"
                     variant="standard"
                     control={control}
                     error={errors.usuario||(!dirtyFields.usuario&&TryCreateOrder)}
-                    helperText={errors.usuario?errors.usuario.message:!dirtyFields.usuario&&TryCreateOrder?"campo requerido":""}
-                    label='Usuario'
+                    helperText={errors.usuario?errors.usuario.message:!dirtyFields.usuario&&TryCreateOrder?"required":""}
+                    label='User'
                     type='text'
                     name="usuario"
                     id="usuario"        
@@ -87,14 +91,14 @@ const LogForm=(props)=>{
                     variant="standard"
                     control={control}
                     error={errors.codigo||(!dirtyFields.codigo&&TryCreateOrder)}
-                    helperText={errors.codigo?errors.codigo.message:!dirtyFields.codigo&&TryCreateOrder?"campo requerido":""}
-                    label={'Contraseña'}
+                    helperText={errors.codigo?errors.codigo.message:!dirtyFields.codigo&&TryCreateOrder?"required":""}
+                    label={'Password'}
                     type='password'
                     name="codigo"
                     id="codigo"
                   />
         <DivContent>
-          <AuthButtonSX  type='submit' >Iniciar Sesion</AuthButtonSX>
+          <AuthButtonSX  type='submit' >log in</AuthButtonSX>
         </DivContent>  
         
       </ContentForm> 

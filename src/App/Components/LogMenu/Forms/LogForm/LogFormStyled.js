@@ -24,6 +24,9 @@ flex-direction:row;
 justify-content:${(props)=>(props.Center?'center':'right')};
 `;
 
+
+
+
 export const ChangeMenu=Styled.h5`
 display:flex;
 color:#1976d2;

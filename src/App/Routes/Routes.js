@@ -1,48 +1,37 @@
 import React, {lazy,Suspense} from 'react'
 import { Routes, Route, Link } from "react-router-dom";
-import Loading from '../Components/Loader/Loader'
-import Home from '../Main/Home/Home';
-import Search from '../Main/Search/Search'
 
 
-const LCalzados=lazy(()=>import('../Main/Calzados/Calzados'))
-const LCalzadosMujer=lazy(()=>import('../Main/Calzados/CalzadosMujer/CalzadosMujer'))
-const LCalzadosMixtos=lazy(()=>import('../Main/Calzados/CalzadosMixtos/CalzadosMixtos'))
+import Loading from '../Components/Loading/Loading'
 
-const LInferior=lazy(()=>import('../Main/Inferior/Inferior'))
-const LInferiorMujeres=lazy(()=>import('../Main/Inferior/InferiorMujeres/InferiorMujeres'))
-const LInferiorHombres=lazy(()=>import('../Main/Inferior/InferiorHombres/InferiorHombres'))
+import {MenuOtipons} from '../Lib/MenuOptions'
 
-const LSuperior=lazy(()=>import('../Main/Superior/Superior'))
-const LSuperiorMujeres=lazy(()=>import('../Main/Superior/SuperiorMujeres/SuperiorMujeres'))
-const LSuperiorHombres=lazy(()=>import('../Main/Superior/SuperiorHombres/SuperiroHombres'))
-
-
+const Home=lazy(()=>import('../Main/Home/Home'))
+const EatCategory=lazy(()=>import('../Main/EatCategoris/EatCategory'))
+const ShoppingList=lazy(()=>import('../Main/ShoppingList/ShoppingList'))
+const Log=lazy(()=>import('../Main/Log/Log'))
+const Orders= lazy(()=>import('../Main/Orders/Orders'))
 
 const AppRoutes =()=>{
 
 
 
     return(
+   
         <Suspense fallback={<Loading/>}>
                 <Routes>
                     <Route path="/" element={<Home/>} />
+                    <Route path="/shoppinglist" element={<ShoppingList/>} />
+                    <Route path="/logguin" element={<Log/>} />
+                    <Route path="/orders" element={<Orders/>} />
 
-                    <Route exact path="/calzados" element={<LCalzados/>} />
-                        <Route exact path="/calzados/Mujeres" element={<LCalzadosMujer/>} />  
-                        <Route exact path="/calzados/Unisex" element={<LCalzadosMixtos/>} /> 
+                    {MenuOtipons.map(element=>{
+                        return(<Route key={element.key+'Route'} path={element.href} element={<EatCategory/>} />)
+                    })}
 
-                    <Route path="/inferior" element={<LInferior/>} />
-                        <Route exact path="/inferior/Mujeres" element={<LInferiorMujeres/>} /> 
-                        <Route exact path="/inferior/Hombres" element={<LInferiorHombres/>} /> 
-
-                    <Route path="/superior" element={<LSuperior/>} />
-                        <Route exact path="/Superior/Mujeres" element={<LSuperiorMujeres/>} /> 
-                        <Route exact path="/Superior/Hombres" element={<LSuperiorHombres/>} />
-
-                    <Route path="/search" element={<Search/>} />       
                 </Routes>
     </Suspense>
+  
     )
 }
 

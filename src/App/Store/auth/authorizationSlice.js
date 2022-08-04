@@ -26,9 +26,11 @@ const authorizationSlice = createSlice({
       localStorage.removeItem("refresh-token");
       localStorage.removeItem("name");
       localStorage.removeItem("status");
+      localStorage.removeItem("address");
+      localStorage.removeItem("src");
       state.token = "";
       state.refreshToken = "";
-      state.name='';
+      state.name='';  
       state.status=false;
     },
   },
@@ -38,5 +40,6 @@ export const { login, logout } = authorizationSlice.actions;
 
 export const selectUserName = (state) => state.authorization.name;
 export const selectStatus = (state) => state.authorization.status;
+
 
 export default authorizationSlice.reducer;

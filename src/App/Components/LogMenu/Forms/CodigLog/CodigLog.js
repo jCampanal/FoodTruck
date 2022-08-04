@@ -3,6 +3,7 @@ import {ContentForm, DivContent,AuthButtonSX,ChangeMenu} from '../LogForm/LogFor
 import Field from '../../../Field/Field';
 import {  formLabelClasses, TextField} from "@mui/material"
 import Loader from '../../../Loader/Loader'
+
 import {motion} from 'framer-motion'
 const CodigLog =(props)=>{
     const [value,setValue]=useState([0,0,0,0,0])
@@ -95,7 +96,6 @@ const CodigLog =(props)=>{
         size="small"
         sx={{width:'40px',margin:'10px 5px'}} 
         label=''
-        value={value[0]}
         type='output'
         name=""        
         id="value"
@@ -108,7 +108,6 @@ const CodigLog =(props)=>{
         sx={{width:'40px',margin:'10px 5px'}} 
         label=''
         error={Error} 
-        value={value[1]}
         type='output'
         name=""
         id="value2"  
@@ -120,7 +119,6 @@ const CodigLog =(props)=>{
         sx={{width:'40px',margin:'10px 5px'}}    
         label=''
         error={Error} 
-        value={value[2]}
         type='output'
         name=""
         id="value3"
@@ -132,7 +130,6 @@ const CodigLog =(props)=>{
         sx={{width:'40px',margin:'10px 5px'}} 
         label=''
         error={Error} 
-        value={value[3]}
         type='output'        
         name=""
         id="value4"
@@ -144,7 +141,6 @@ const CodigLog =(props)=>{
         sx={{width:'40px',margin:'10px 5px'}} 
         label=''
         error={Error} 
-        value={value[4]}
         type='output'
         name=""
         id="value5" 
@@ -155,7 +151,7 @@ const CodigLog =(props)=>{
 
     <ContentForm >
         <DivContent Width='100%' Center>
-            {`Renviar el codigo: ${renviarMinuts}:${renviarFirstSeconds}${renviarSecondsSeconds}`}
+            {`Resend : ${renviarMinuts}:${renviarFirstSeconds}${renviarSecondsSeconds}`}
         </DivContent>
     </ContentForm>
 
@@ -167,11 +163,10 @@ const CodigLog =(props)=>{
              }        
      </ContentForm>
 
-    <ContentForm Row Justify='center' Width='100%'>
-        <ContentForm Row Justify='space-between' Width='70%'>
-            <AuthButtonSX onClick={HandlerRenviar} disabled={HabilitarEnviar}>Renviar</AuthButtonSX>
-            <AuthButtonSX onClick={()=>props.ChangeMenu('Nuevo')}>Regresar</AuthButtonSX>
-        </ContentForm>
+    <ContentForm Row Justify='space-evenly' Width='100%'>
+            <AuthButtonSX onClick={HandlerRenviar} disabled={HabilitarEnviar}>Resent</AuthButtonSX>
+            <AuthButtonSX onClick={()=>props.ChangeMenu('Nuevo')}>Back</AuthButtonSX>
+       
     </ContentForm>
     </ContentForm>
     </form>

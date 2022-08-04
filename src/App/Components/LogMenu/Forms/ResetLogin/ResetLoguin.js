@@ -19,13 +19,13 @@ const ResetLoguin=(props)=>{
   const [TryCreateOrder,setTryCreateOrder]=useState(false)
   const dispatch=useDispatch()
     const validationRules = yup.object().shape({
-        correo: yup.string().email().test("Email-Telefono", "Necesitamos o un correo o un teléfono", function (value) {
+        correo: yup.string().email().test("Email-Telefono", "we need the email or the phone", function (value) {
             return (!(this.parent.telefono==='' &&  value===''));
          }),
           telefono: yup.string().matches(phoneRegex, {
-            message: "No parece un telefono",
+            message: "don't look like a phone",
             excludeEmptyString: true,
-          }).test("Email-Telefono", "Necesitamos o un correo o un teléfono", function (value) {
+          }).test("Email-Telefono", "we need the email or the phone", function (value) {
              return (!(value===''&&  this.parent.correo===''));
           }),
       });
@@ -46,9 +46,7 @@ const ResetLoguin=(props)=>{
 
 
     const handleSubmitForm=()=>{      
-        setTryCreateOrder(true)
-        console.log(isValid)
-        console.log(errors)
+        setTryCreateOrder(true) 
         if(isValid){
         //Aqui en teoria se envia el sms        
         props.ChangeMenu('Iniciar')
@@ -60,7 +58,7 @@ const ResetLoguin=(props)=>{
       <form>
       <ContentForm as={motion.div} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
       <DivContent Width='100%' Center>
-          <ChangeMenu onClick={()=>props.ChangeMenu('Iniciar')}>{'Authentificarse'}</ChangeMenu>
+          <ChangeMenu onClick={()=>props.ChangeMenu('Iniciar')}>{'Auth'}</ChangeMenu>
       </DivContent>
       <Field
         size="small"

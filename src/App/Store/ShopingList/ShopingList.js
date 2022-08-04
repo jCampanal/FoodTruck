@@ -46,21 +46,38 @@ const ShopingListSlice = createSlice({
 
     putShopingElement: (state, action) => { 
         state.NameList = [...action.payload.Code,action.payload.ShopingElement.Id];
+        console.log('NameList')
+        console.log([...action.payload.Code,action.payload.ShopingElement.Id])
         state.List=[...action.payload.List,action.payload.ShopingElement]
         localStorage.setItem(action.payload.ShopingElement.Id+'Nombre', action.payload.ShopingElement.Nombre);
         localStorage.setItem(action.payload.ShopingElement.Id+'Src', action.payload.ShopingElement.Src);
         localStorage.setItem(action.payload.ShopingElement.Id+'Cantidad', action.payload.ShopingElement.Cantidad);
         localStorage.setItem(action.payload.ShopingElement.Id+'Precio', action.payload.ShopingElement.Precio);
         let nameArray=action.payload.ShopingElement.Id
-        action.payload.Code.map((element,index)=>{index===0?nameArray=element:nameArray=nameArray+' '+element})        
+        console.log('nameArray')
+        console.log(nameArray)
+        action.payload.Code.map((element,index)=>{nameArray=nameArray+' '+element})        
         localStorage.setItem('NameList', nameArray);
     },
+
+    clearElements: (state,action) => {
+      state.NameList=''
+      state.List=[]
+     
+      action.payload.map(element=>{ 
+        localStorage.removeItem(element+'Nombre');
+        localStorage.removeItem(element+'Src');
+        localStorage.removeItem(element+'Cantidad');
+        localStorage.removeItem(element+'Precio');
+      })
+      localStorage.removeItem("NameList");
+    }
     
   },
  
 });
 
-export const { eliminateShopingElement, putShopingElement } = ShopingListSlice.actions;
+export const { eliminateShopingElement, putShopingElement, clearElements } = ShopingListSlice.actions;
 
 export const selectShopinList = (state) => state.shopingList.List;
 export const CodeShopinList = (state) => state.shopingList.NameList;
