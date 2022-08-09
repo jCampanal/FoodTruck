@@ -15,7 +15,8 @@ const SecondDivS=Styled.div`
 width:100%;
 height:100%;
 display:flex;
-justify-content:right;
+flex-flow: row wrap;
+justify-content:end;
 padding-right:20px;
 `;
 

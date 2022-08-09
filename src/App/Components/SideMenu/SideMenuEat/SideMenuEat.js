@@ -16,6 +16,7 @@ overflow-y:auto;
 const ButtonContent=Styled.div`
 display:flex;
 width:100%;
+flex-flow: row wrap;
 justify-content:right;
 align-items:center`;
 

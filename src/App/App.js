@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import './App.css';
 import {ThemeProvider} from '@mui/material/styles' 
 import {MuiTheme} from './StyleConfig/ThemeMaterialUI/ThemeMUI'
@@ -11,6 +11,11 @@ const App=()=> {
 
   const favicon=document.getElementById('favicon')
   favicon.href=Favicon
+
+  useEffect(()=>{
+    document.title='Food truck'
+  },[])
+ 
 
   return (
     <ThemeProvider theme={MuiTheme}>
